@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class TrialMail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $name;
+    public $event;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($name, $event)
+    {
+        $this->name = $name;
+        $this->event = $event;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->from('membership@nova-labs.org')
+            ->replyTo('membership@nova-labs.org', 'Nova Labs Membership Team')
+            ->subject('Member: ' . $this->name . ' - Test Message')
+            ->markdown('emails.trialMessage');
+    }
+}

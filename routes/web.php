@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Stripe webhook - stripe-web-hook-nl is defined in Stripe.com interface
+Route::stripeWebhooks('stripe-web-hook-nl');
