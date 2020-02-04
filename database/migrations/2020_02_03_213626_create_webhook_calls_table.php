@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStripeWebhookCallsTable extends Migration
+class CreateWebhookCallsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateStripeWebhookCallsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stripe_webhook_calls', function (Blueprint $table) {
+        Schema::create('webhook_calls', function (Blueprint $table) {
             $table->bigIncrements('id');
 
             $table->string('type')->nullable();
@@ -32,6 +32,6 @@ class CreateStripeWebhookCallsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stripe_webhook_calls');
+        Schema::dropIfExists('webhook_calls');
     }
 }
