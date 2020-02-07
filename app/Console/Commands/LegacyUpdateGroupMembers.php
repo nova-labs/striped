@@ -52,14 +52,14 @@ class LegacyUpdateGroupMembers extends Command
 
             foreach ($legacy_group_id_list as $entry){
 
-                $new_entry = MemberGroup::where('group_id','=',$group_id)->where('user_id','=',$entry->person_id)->first();
+                $new_entry = MemberGroup::where('group_id','=',$group_id)->where('member_id','=',$entry->person_id)->first();
 
                 if($new_entry){
                     $membership_unchanged++;
                 }
                 else{
                     $new_membership = new MemberGroup();
-                    $new_membership->user_id = $entry->person_id;
+                    $new_membership->member_id = $entry->person_id;
                     $new_membership->group_id = $entry->group_id;
 
                     $time = explode('.', $entry->date_created);

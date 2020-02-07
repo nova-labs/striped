@@ -13,7 +13,7 @@ class CreateMemberGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('member_group', function (Blueprint $table) {
+        Schema::create('member_groups', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('member_id',false, true);
             $table->integer('group_id',false, true);
@@ -29,6 +29,6 @@ class CreateMemberGroupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('member_group');
+        Schema::dropIfExists('member_groups');
     }
 }
