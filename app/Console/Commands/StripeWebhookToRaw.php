@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\WebhookCalls;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 
 use App\StripeRawEntries;
 
@@ -40,7 +40,7 @@ class StripeWebhookToRaw extends Command
      */
     public function handle()
     {
-        $webhooks = DB::table('webhook_calls')->where('processed', '=', false)
+        $webhooks = WebhookCalls::where('processed', '=', false)
             ->get();
 
         foreach($webhooks as $webhook){
