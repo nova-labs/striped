@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Group;
-use App\GroupUser;
+use App\MemberGroup;
 use App\LegacyGroups;
 use App\LegacyPersonGroup;
 use Illuminate\Console\Command;
@@ -52,13 +52,13 @@ class LegacyUpdateGroupMembers extends Command
 
             foreach ($legacy_group_id_list as $entry){
 
-                $new_entry = GroupUser::where('group_id','=',$group_id)->where('user_id','=',$entry->person_id)->first();
+                $new_entry = MemberGroup::where('group_id','=',$group_id)->where('user_id','=',$entry->person_id)->first();
 
                 if($new_entry){
                     $membership_unchanged++;
                 }
                 else{
-                    $new_membership = new GroupUser();
+                    $new_membership = new MemberGroup();
                     $new_membership->user_id = $entry->person_id;
                     $new_membership->group_id = $entry->group_id;
 
@@ -74,7 +74,7 @@ class LegacyUpdateGroupMembers extends Command
         // to do check for membership equality and check those groups that have too many members
 
         $total_source = LegacyPersonGroup::count();
-        $total_dest = GroupUser::count();
+        $total_dest = MemberGroup::count();
         echo 'Source: ' . $total_source . ' dest: ' . $total_dest ."\n";
 
         echo 'Membership updated: ' . $membership_added . ' not: ' . $membership_unchanged ."\n";
