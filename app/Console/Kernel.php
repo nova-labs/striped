@@ -26,6 +26,17 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('novalabs:webhookToRaw')
             ->everyFiveMinutes();
+
+        $schedule->command('novalabs:stripeinvoiceparse')
+            ->everyFiveMinutes();
+        $schedule->command('novalabs:stripeSubscriptionParse')
+            ->everyFifteenMinutes();
+        $schedule->command('novalabs:stripepaymentparse')
+            ->everyFifteenMinutes();
+        $schedule->command('novalabs:striperefundparse')
+            ->everyFifteenMinutes();
+
+        
     }
 
     /**
