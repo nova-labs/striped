@@ -21,6 +21,8 @@ class CreateWebhookCallsTable extends Migration
             $table->text('exception')->nullable();
             $table->boolean('processed')->default(false);
 
+            $table->index(['processed']);
+
             $table->timestamps();
         });
     }

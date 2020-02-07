@@ -40,8 +40,7 @@ class StripeWebhookToRaw extends Command
      */
     public function handle()
     {
-        // todo: change to use processed
-        $webhooks = DB::table('webhook_calls')->whereRaw('created_at >= now() - INTERVAL 12 HOUR')
+        $webhooks = DB::table('webhook_calls')->where('processed', '=', false)
             ->get();
 
         foreach($webhooks as $webhook){
@@ -67,6 +66,9 @@ class StripeWebhookToRaw extends Command
                 $new_entry->valid = true;
                 $new_entry->save();
             }
+            $webhook->processed = true;
+            $webhook->save();
+
         }
 
     }
