@@ -70,7 +70,10 @@ class LegacyUpdateUsers extends Command
 
         if($legacy_user){
 
-            // todo: add email update
+            $email =  $legacy_user->emails()->first()['email_address'];
+
+            if ($existing_user->email != $email)
+                $existing_user->member_type = $email;
 
             if ($existing_user->member_type != $legacy_user->member_type)
                 $existing_user->member_type = $legacy_user->member_type;

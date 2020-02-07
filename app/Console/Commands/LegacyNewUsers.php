@@ -42,9 +42,9 @@ class LegacyNewUsers extends Command
      */
     public function handle()
     {
-        $max_local_user_id = DB::table('users')->max('id');
-        if (isset($max_local_user_id))
-            $local_max = $max_local_user_id;
+        $max_local_member_id = DB::table('members')->max('id');
+        if (isset($max_local_member_id))
+            $local_max = $max_local_member_id;
         else
             $local_max =0;
 
@@ -53,14 +53,14 @@ class LegacyNewUsers extends Command
         $migration_user_count =0;
 
 
-        foreach ($new_legacy_users as $legacy_user)
+        foreach ($new_legacy_users as $new_legacy_user)
         {
-            $email =  $legacy_user->emails()->first()['email_address'];
+            $email =  $new_legacy_user->emails()->first()['email_address'];
 
-            $existing_user = Member::where('email', $email)->first();
+            $existing_user = Member::where('id', $new_legacy_user->id)->first();
 
             if (!$existing_user){
-                $this->addNewUser($legacy_user, $email);
+                $this->addNewUser($new_legacy_user, $email);
                 $migration_user_count++;
             }
         }
