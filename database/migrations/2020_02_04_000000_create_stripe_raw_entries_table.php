@@ -20,7 +20,7 @@ class CreateStripeRawEntriesTable extends Migration
             $table->boolean('processed')->default(false);
             $table->string('stripe_event_id')->nullable();
             $table->index('stripe_event_id');
-            $table->string('type')->nullable();
+            $table->string('name')->nullable();
             $table->dateTime('created')->nullable();
             $table->string('customer_id')->nullable();
             $table->string('api_version')->nullable();

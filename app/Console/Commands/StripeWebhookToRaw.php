@@ -55,7 +55,7 @@ class StripeWebhookToRaw extends Command
                 $new_entry = new StripeRawEntries();
                 $new_entry->stripe_event_id = $event_id;
                 $new_entry->data = $webhook->payload;
-                $new_entry->type = $webhook->type;
+                $new_entry->name = $webhook->name;
                 $new_entry->api_version = $decoded["api_version"];
                 $new_entry->created = date("Y-m-d H:i:s", $decoded["created"]);
                 if (isset($decoded["data"]["object"]["customer"])) {
