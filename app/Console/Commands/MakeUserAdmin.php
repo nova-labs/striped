@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Member;
+use App\User;
 use Illuminate\Console\Command;
 use Spatie\Permission\Models\Role;
 
@@ -54,7 +55,7 @@ class MakeUserAdmin extends Command
             {
                 $member = $members->first();
 
-                $user = New User;
+                $user = New User();
                 $user->email = $member->email;
                 $user->name = $member->name;
                 $user->password = $member->old_password;
