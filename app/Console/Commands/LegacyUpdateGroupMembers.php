@@ -44,7 +44,7 @@ class LegacyUpdateGroupMembers extends Command
         $groups = Group::all('id');
         $membership_added = 0;
         $membership_unchanged = 0;
-        
+
         foreach ($groups as $group)
         {
             $group_id = $group->id;
@@ -62,8 +62,13 @@ class LegacyUpdateGroupMembers extends Command
                     $new_membership->member_id = $entry->person_id;
                     $new_membership->group_id = $entry->group_id;
 
-                    $time = explode('.', $entry->date_created);
-                    $new_membership->created_at = $time[0];
+                    if ($entry->date_created !== NULL){
+                        $time = explode('.', $entry->date_created);
+                        $new_membership->created_at = $time[0];
+                    }
+                    else{
+                        $new_membership->created_at = '2010-01-01 01:01:01';
+                    }
 
                     $new_membership->save();
                     $membership_added++;
