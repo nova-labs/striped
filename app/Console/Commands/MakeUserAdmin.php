@@ -58,7 +58,10 @@ class MakeUserAdmin extends Command
                 $user = New User();
                 $user->email = $member->email;
                 $user->name = $member->name;
-                $user->password = $member->old_password;
+                //$user->password = $member->old_password;
+                // password test does not work for now
+                //  todo: fix login 
+                //
                 $user->save();
 
                 $user->assignRole('super-admin');
